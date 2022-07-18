@@ -13,25 +13,25 @@ repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifes
 repo sync -c -j4 --force-sync --no-clone-bundle --no-tags
 repo sync --force-sync
 
-git clone https://github.com/sarthakroy2002/android_recovery_realme_RMX2020 device/realme/RMX2020
+git clone https://github.com/kardebayan/twrp_device_xiaomi_mi8937-new.git device/xiaomi/mi8937
 
 cd bootable/recovery
-git fetch https://gerrit.twrp.me/android_bootable_recovery refs/changes/05/5405/21 && git cherry-pick FETCH_HEAD
-git fetch https://gerrit.twrp.me/android_bootable_recovery refs/changes/39/5639/1 && git cherry-pick FETCH_HEAD
-git fetch https://github.com/HemanthJabalpuri/android_bootable_recovery test
-git cherry-pick 6d5c365617778d107ccc6b32b55238715a06d0bc
+git fetch https://gerrit.twrp.me/android_bootable_recovery refs/changes/33/5633/6 && git checkout FETCH_HEAD
 cd ../..
 cd system/vold
-git fetch https://gerrit.twrp.me/android_system_vold refs/changes/40/5540/4 && git cherry-pick FETCH_HEAD
+git fetch https://gerrit.twrp.me/android_system_vold refs/changes/45/5645/2 && git checkout FETCH_HEAD
 cd ../..
+cd vendor/twrp
+git fetch https://gerrit.twrp.me/android_vendor_twrp refs/changes/57/5657/1 && git checkout FETCH_HEAD
+cd ../../
 
 . build/envsetup.sh
-lunch twrp_RMX2020-eng
+lunch twrp_mi8937-eng
 mka clean
-lunch twrp_RMX2020-eng
+lunch twrp_mi8937-eng
 mka recoveryimage
 
-cd out/target/product/RMX2020
+cd out/target/product/mi8937
 
 curl -sL https://git.io/file-transfer | sh
 ./transfer wet recovery.img
